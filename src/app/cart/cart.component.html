@@ -1,0 +1,74 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="error-block">
+                        {{errormessage}}
+                    </div>
+                </div>
+                <div class="panel-body" *ngIf="hasOrders">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Item Name</th>
+                                        <th>Quentity</th>
+                                        <th>Item Price</th>
+                                        <th>UOM</th>
+                                        <th>Tax</th>
+                                        <th>Discount</th>
+                                        <th>Total Price</th>
+                                        <th>Remove</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of order?.orderDetails">
+                                        <td>{{item.itemName}}</td>
+                                        <td>{{item.quantity}}</td>
+                                        <td>{{item.itemPrice}}</td>
+                                        <td>{{item.uom}}</td>
+                                        <td>{{item.tax}}</td>
+                                        <td>{{item.discount}}</td>
+                                        <td>{{item.totalPrice}}</td>
+                                        <td>
+                                            <button (click)="Remove(item.itemId)" type="button" 
+                                            class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <label class="col-md-3">Discount Code: </label>
+                                <div class="col-md-3"> {{order?.discountCode}}</div>
+                            </div>
+                            <div class="row">
+                                <label class="col-md-3">Total Discount: </label>
+                                <div class="col-md-3"> {{order?.discountValue}}</div>
+                            </div>
+                            <div class="row">
+                                <label class="col-md-3">Tax Value: </label>
+                                <div class="col-md-3"> {{order?.taxValue}}</div>
+                            </div>
+                            <div class="row">
+                                <label class="col-md-3">Total Price: </label>
+                                <div class="col-md-3"> {{order?.totalPrice}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body" *ngIf="!hasOrders">
+                    <h3>No Orders</h3>
+                </div>
+                <div class="panel-footer" *ngIf="hasOrders">
+                    <button type="button" (click)="OrderNow()" class="btn btn-success">Order Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

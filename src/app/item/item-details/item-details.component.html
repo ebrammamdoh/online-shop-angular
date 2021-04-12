@@ -1,0 +1,71 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Item Name: {{item?.name}}
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <label class="col-md-3">Description: </label>
+                                <div class="col-md-3"> {{item?.description}}</div>
+                            </div>
+                            <div class="row">
+                                <label class="col-md-3">Unit Price: </label>
+                                <div class="col-md-3"> {{item?.unitPrice}}</div>
+                            </div>
+                            <div class="row">
+                                <label class="col-md-4">Avaialable Quantities: </label>
+                                <div class="col-md-3"> {{item?.qty}} {{item?.uom}}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-12">Attributes: </label>
+                                <div *ngFor="let i of item?.attributes">
+                                    <h5>- {{i}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form [formGroup]="form">
+                                <div class="form-group" [ngClass]="{'has-error': (form.get('quentity').touched || 
+                                                            form.get('quentity').dirty) &&
+                                                            !form.get('quentity').valid }">
+                                    <input type="number" class="form-control" placeholder="enter quentity"
+                                        formControlName="quentity">
+                                    <span class="help-block error-block" *ngIf="(form.get('quentity').touched ||
+                                                                                form.get('quentity').dirty) &&
+                                                                                form.get('quentity').errors">
+                                        <span *ngIf="form.get('quentity').errors.required">
+                                            This field is required
+                                        </span>
+                                        <span *ngIf="form.get('quentity').errors.max">
+                                            Min quentity is {{item?.qty}} items
+                                        </span>
+                                        <span *ngIf="form.get('quentity').errors.min">
+                                            Min quentity is 1 item
+                                        </span>
+                                    </span>
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" (click)="AddToCart(item.id, item.name)"
+                                        class="btn btn-success" [disabled]="!form.valid">Add To Cart</button>
+                                </div>
+                                <div class="error-block">
+                                    {{errormessage}}
+                                </div>
+                            </form>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

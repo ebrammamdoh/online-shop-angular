@@ -1,0 +1,147 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <form class="form-horizontal" (ngSubmit)="onSubmit()" [formGroup]="form">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        Register
+                        <div class="error-block">
+                            {{errorMessage}}
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group" [ngClass]="{'has-error': (form.get('descAr').touched || 
+                            form.get('descAr').dirty) &&
+                            !form.get('descAr').valid }">
+                            <label class="col-md-2 control-label" for="descAr">Arabic Description</label>
+                            <div class="col-md-3">
+                                <input id="descAr" type="descAr" class="form-control" placeholder="enter description"
+                                    formControlName="descAr">
+                            </div>
+                            <span class="help-block error-block" *ngIf="(form.get('descAr').touched ||
+                form.get('descAr').dirty) &&
+                form.get('descAr').errors">
+                                <span *ngIf="form.get('descAr').errors.required">
+                                    Please provide your Description Arabic
+                                </span>
+                                <span *ngIf="form.get('descAr').errors.maxlength">
+                                    Maxlength is 100 chars
+                                </span>
+                                <span *ngIf="form.get('descAr').errors.minlength">
+                                    Minlength is 5 chars
+                                </span>
+                            </span>
+                        </div>
+
+                        <div class="form-group" [ngClass]="{'has-error': (form.get('descEn').touched || 
+                            form.get('descEn').dirty) &&
+                            !form.get('descEn').valid }">
+                            <label class="col-md-2 control-label" for="descEn">English Description</label>
+                            <div class="col-md-3">
+                                <input id="descEn" type="descEn" class="form-control" placeholder="enter descEn"
+                                    formControlName="descEn">
+                            </div>
+                            <span class="help-block error-block" *ngIf="(form.get('descEn').touched ||
+                form.get('descEn').dirty) &&
+                form.get('descEn').errors">
+                                <span *ngIf="form.get('descEn').errors.required">
+                                    Please provide your Description English
+                                </span>
+                                <span *ngIf="form.get('descEn').errors.maxlength">
+                                    Maxlength is 100 chars
+                                </span>
+                                <span *ngIf="form.get('descEn').errors.minlength">
+                                    Minlength is 5 chars
+                                </span>
+                            </span>
+                        </div>
+
+                        <div class="form-group" [ngClass]="{'has-error': (form.get('email').touched || 
+                            form.get('email').dirty) &&
+                            !form.get('email').valid }">
+                            <label class="col-md-2 control-label" for="email">Email</label>
+                            <div class="col-md-3">
+                                <input id="email" type="email" class="form-control" placeholder="enter email"
+                                    formControlName="email">
+                            </div>
+                            <span class="help-block error-block" *ngIf="(form.get('email').touched ||
+                form.get('email').dirty) &&
+                form.get('email').errors">
+                                <span *ngIf="form.get('email').errors.required">
+                                    Please provide your E-mail
+                                </span>
+                                <span *ngIf="form.get('email').errors.maxlength">
+                                    Maxlength is 100 chars
+                                </span>
+
+                            </span>
+                        </div>
+
+                        <div formGroupName="passwordGroup" [ngClass]="{'has-error': form.get('passwordGroup').errors }">
+                            <div class="form-group" [ngClass]="{'has-error': passwordMessage }">
+
+                                <label for="password" class="col-md-2 control-label">Password</label>
+                                <div class="col-md-3">
+                                    <input type="password" class="form-control" formControlName="password"
+                                        placeholder="password (required)">
+                                </div>
+                                <span class="help-block error-block" *ngIf="passwordMessage">
+                                    {{passwordMessage}}
+                                </span>
+
+                            </div>
+                            <div class="form-group" [ngClass]="{'has-error': (form.get('passwordGroup.confirmPassword').touched || 
+                form.get('passwordGroup.confirmPassword').dirty) &&
+                !form.get('passwordGroup.confirmPassword').valid }">
+
+                                <label for="confirmPassword" class="col-md-2 control-label">Confirm Password</label>
+                                <div class="col-md-3">
+                                    <input type="password" class="form-control" formControlName="confirmPassword"
+                                        placeholder="confirmPassword (required)">
+                                </div>
+                                <span class="help-block error-block" *ngIf="(form.get('passwordGroup.confirmPassword').touched ||
+                form.get('passwordGroup.confirmPassword').dirty) &&
+                (form.get('passwordGroup.confirmPassword').errors ||
+                form.get('passwordGroup').errors) ">
+                                    <span *ngIf="form.get('passwordGroup.confirmPassword').errors?.required">
+                                        This field is required
+                                    </span>
+                                    <span *ngIf="form.get('passwordGroup').errors?.match">
+                                        Password does not match
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group" [ngClass]="{'has-error': (form.get('role').touched || 
+                                    form.get('role').dirty) &&
+                                    !form.get('role').valid }">
+
+                            <label for="" class="col-md-2 control-label">Roles</label>
+                            <div class="col-md-3">
+                                <select class="form-control" formControlName="role">
+                                    <option selected disabled value="">Please select your
+                                        role</option>
+                                    <option [value]="role.id" *ngFor="let role of roles">
+                                        {{role.title}}</option>
+                                </select>
+                            </div>
+                            <span class="help-block error-block" *ngIf="(form.get('role').touched ||
+                        form.get('role').dirty) &&
+                        form.get('role').errors">
+                                <span *ngIf="form.get('role').errors.required">
+                                    Role is required
+                                </span>
+                            </span>
+                        </div>
+
+                    </div>
+                    <div class="panel-footer">
+                        <button type="submit" class="btn btn-success" [disabled]="!form.valid">Register</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
