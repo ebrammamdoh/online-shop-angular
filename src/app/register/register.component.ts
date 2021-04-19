@@ -27,8 +27,6 @@ export class RegisterComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private _authService: AuthService,
-    private _router: Router,
-    private toastr: ToastrService ,
   ) { }
 
   ngOnInit(): void {
@@ -57,6 +55,7 @@ export class RegisterComponent implements OnInit {
       descriptionen: this.form.get('descEn').value,
       username: this.form.get('email').value,
       password: this.form.get('passwordGroup.password').value,
+      confirmPassword: this.form.get('passwordGroup.confirmPassword').value,
       roles: +this.form.get('role').value
     }
     this._authService.register(user).subscribe(data=> {},
