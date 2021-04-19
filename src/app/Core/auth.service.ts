@@ -21,8 +21,7 @@ export class AuthService implements OnInit {
     ) { }
 
     async ngOnInit(): Promise<void> {
-        let exist = this.checkExist();
-        if(exist)
+        if(this.checkExist)
             this._router.navigate(['items'])
     }
 
@@ -40,7 +39,6 @@ export class AuthService implements OnInit {
                 tap(data => {
                     this.isAuthenticated = true;
                     localStorage.setItem('access_token', JSON.stringify(data.access_token));
-                    this._router.navigate(['/items']);
                 }),
             );
     }
@@ -71,7 +69,7 @@ export class AuthService implements OnInit {
         return ((localStorage.getItem('access_token') as string) ?? '').replace(/['"]+/g, '');
     }
 
-    checkExist(): boolean {
+    get checkExist(): boolean {
         var token = localStorage.getItem('access_token') as string;
         if(token){
             this.isAuthenticated = true;

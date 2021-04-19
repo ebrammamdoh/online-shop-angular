@@ -12,9 +12,8 @@ export class AuthGuard implements CanActivate {
             next: ActivatedRouteSnapshot,
             state: RouterStateSnapshot
         ): Promise<boolean> {
-        let isExist = await this._authService.checkExist();
+        let isExist = await this._authService.checkExist;
         if(isExist) {
-            this._router.navigate(['/items']);
             return true;
         }
         this._router.navigate(['']);

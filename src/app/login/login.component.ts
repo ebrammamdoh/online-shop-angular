@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     this.error = '';
     this._authService.login({email: email, password: password}).subscribe(data => {
       if(data){
-        this._router.navigate(['items']);
+        this._router.navigate(['/items']);
       }
 
      }, err => {
