@@ -32,7 +32,7 @@ export class AuthService implements OnInit {
         .set('username', user.email)
         .set('password', user.password)
         .set('client_id', 'onlineshop_angular')
-        .set('client_secret', 'secret')
+        .set('client_secret', '203b0707-547e-478b-b9e4-7fd9b1a825b2')
         .set('grant_type', 'password');
         return this.http.post<TokenResponse>(`${this.loginUrl}`, body.toString(), {
             headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
